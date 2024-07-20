@@ -1,47 +1,114 @@
+from decimal import Decimal
+
+
 class Calculator:
-    @staticmethod
-    def add(a, b):
-        return a + b
+    def __init__(self, num1: int | float, num2: int | float) -> None:
+        self.num1 = Decimal(num1)
+        self.num2 = Decimal(num2)
 
-    @staticmethod
-    def subtract(a, b):
-        return a - b
+    @property
+    def add(self) -> Decimal:
+        return self.num1 + self.num2
 
-    @staticmethod
-    def multiply(a, b):
-        return a * b
+    @property
+    def subtract(self) -> Decimal:
+        return self.num1 - self.num2
 
-    @staticmethod
-    def divide(a, b):
-        if b != 0:
-            return a / b
-        else:
-            return "You can't divide by zero"
+    @property
+    def multiply(self) -> Decimal:
+        return self.num1 * self.num2
+
+    @property
+    def divide(self) -> Decimal | str:
+        try:
+            return self.num1 / self.num2
+        except ZeroDivisionError:
+            return "Division by zero"
+
+    def __str__(self) -> str:
+        return f"Calculating by {self.num1} {self.num2}"
+
+    def __repr__(self) -> str:
+        return f"Calculating by {self.num1} {self.num2}"
+
+    def __eq__(self, other) -> bool:
+        return self.num1 == other.num1 and self.num2 == other.num2
+
+    def __ne__(self, other) -> bool:
+        return self.num1 != other.num1 and self.num2 != other.num2
+
+    def __lt__(self, other) -> bool:
+        return self.num1 < other.num1 and self.num2 < other.num2
+
+    def __le__(self, other) -> bool:
+        return self.num1 <= other.num1 and self.num2 <= other.num2
+
+    def __gt__(self, other) -> bool:
+        return self.num1 > other.num1 and self.num2 > other.num2
+
+    def __ge__(self, other) -> bool:
+        return self.num1 >= other.num1 and self.num2 >= other.num2
 
 
-while True:
+def get_number() -> float:
+    while True:
+        try:
+            user_input = float(input("Enter a number: "))
+            return user_input
+        except ValueError:
+            print("Please enter a number")
+
+
+def get_opration() -> int:
+    while True:
+        try:
+            user_input = int(input("Enter a operation: "))
+            return user_input
+        except ValueError:
+            print("Please enter a number")
+
+
+def menu() -> None:
+    print("Select an operation:")
+    print("1.Add")
+    print("2.Subtract")
+    print("3.Multiply")
+    print("4.Divide")
+    print("5.Changing first number")
+    print("6.Changing first number")
+    print("7.Exit")
+
+
+def main():
     try:
-        a = float(input("Birinchi sonni kiriting\n>>> "))
-        print("Amallardan birini tanlang! (1.+, 2.-, 3.*, 4./)")
-        amal = input("Tanlang: ")
-        b = float(input("Ikkinchi sonni kiriting\n>>> "))
+        num1 = get_number()
+        num2 = get_number()
+        while True:
+            result = Calculator(num1, num2)
+            menu()
+            operation = get_opration()
+            match operation:
+                case 1:
+                    print(result.add)
+                case 2:
+                    print(result.subtract)
+                case 3:
+                    print(result.multiply)
+                case 4:
+                    print(result.divide)
+                case 5:
+                    old_num = num1
+                    num1 = get_number()
+                    print(f"{old_num} -> {num1}")
+                case 6:
+                    old_num = num2
+                    num2 = get_number()
+                    print(f"{old_num} -> {num2}")
+                case 7:
+                    break
+    except KeyboardInterrupt:
+        print("\nBye")
 
-        if amal == "1" or amal == "+":
-            print("Natija: ", Calculator.add(a, b))
-        elif amal == "-" or amal == "2":
-            print("Natija: ", Calculator.subtract(a, b))
-        elif amal == "*" or amal == "3":
-            print("Natija: ", Calculator.multiply(a, b))
-        elif amal == "/" or amal == "4":
-            print("Natija: ", Calculator.divide(a, b))
-        else:
-            print("Noma'lum amal")
-    except ValueError:
-        print("Noma'lum kiritish. Iltimos, raqam kiriting.")
 
-    davom_etish = input("Dastur ishlashda davom etsinmi? (ha/yo'q): ").strip().lower()
-    if davom_etish != 'ha':
-        print("Dastur to'xtatildi.")
-        break
-
-
+if __name__ == "__main__":
+    main()
