@@ -31,10 +31,11 @@ class Ombor:
 
     def mahsulot_qolganligi(self):
         # mahsulot_nomi = input("Mahsulot nomini kiriting: ")
-        for i,x in self.mahsulotlar.items():
-            if self.mahsulotlar[i]!=0:
-            # print(f"{mahsulot_nomi} mahsulotidan qolgan miqdori: {self.mahsulotlar[mahsulot_nomi]} ta")
+        for i, x in self.mahsulotlar.items():
+            if self.mahsulotlar[i] != 0:
+                # print(f"{mahsulot_nomi} mahsulotidan qolgan miqdori: {self.mahsulotlar[mahsulot_nomi]} ta")
                 print(f"{i} dan {x} ta qolgan")
+
     def qolmagan_mahsulotlar(self):
         qolmaganlar = [mahsulot for mahsulot, miqdor in self.mahsulotlar.items() if miqdor == 0]
         print(f"Qolmagan mahsulotlar: {', '.join(qolmaganlar)}")
