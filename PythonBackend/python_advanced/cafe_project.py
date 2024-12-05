@@ -40,7 +40,7 @@ class Cafe:
                 elif response == "admin" or response == "2":
                     self.admin_login()
                 else:
-                    print("Noto'g'ri tanlov, iltimos, mijoz yoki admin deb tanlang.")
+                    print("Noto'g'ri tanlov, iltimos, mijoz yoki admin ni tanlang!")
             except Exception as e:
                 print("Xato yuz berdi: ", e)
 

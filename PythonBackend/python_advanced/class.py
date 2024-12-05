@@ -56,3 +56,6 @@
 #     print("mahmud yutqazdi")
 # else:
 #     print("jasur yuqazdi")
+
+
+print('Hello world')
